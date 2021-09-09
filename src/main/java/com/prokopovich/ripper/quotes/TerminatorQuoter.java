@@ -1,5 +1,6 @@
 package com.prokopovich.ripper.quotes;
 
+import com.prokopovich.ripper.annotation.DeprecatedClass;
 import com.prokopovich.ripper.annotation.InjectRandomInt;
 import com.prokopovich.ripper.annotation.PostProxy;
 import com.prokopovich.ripper.annotation.Profiling;
@@ -7,6 +8,7 @@ import com.prokopovich.ripper.annotation.Profiling;
 import javax.annotation.PostConstruct;
 
 @Profiling
+@DeprecatedClass(newImpl = T1000.class)
 public class TerminatorQuoter implements Quoter {
 
     @InjectRandomInt(min = 2, max = 7)
@@ -23,6 +25,7 @@ public class TerminatorQuoter implements Quoter {
     public void init() {
 
         System.out.println("Phase 2");
+
         System.out.println(repeat);
     }
 
@@ -34,8 +37,14 @@ public class TerminatorQuoter implements Quoter {
     @PostProxy
     public void sayQuote() {
 
+        System.out.println("Phase 3");
+
         for (int i = 0; i < repeat; i++) {
             System.out.println("message = " + message);
         }
+    }
+
+    public void setRepeat(int repeat) {
+        this.repeat = repeat;
     }
 }

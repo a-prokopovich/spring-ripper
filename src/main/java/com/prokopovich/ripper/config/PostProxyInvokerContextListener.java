@@ -29,6 +29,7 @@ public class PostProxyInvokerContextListener implements ApplicationListener<Cont
                 Class<?> originalClass = Class.forName(originalClassName);
                 Method[] methods = originalClass.getMethods();
                 for (Method method : methods) {
+
                     if (method.isAnnotationPresent(PostProxy.class)) {
                         Object bean = context.getBean(name);
                         Method currentMethod = bean.getClass().getMethod(method.getName(), method.getParameterTypes());
